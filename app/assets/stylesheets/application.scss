@@ -10,6 +10,26 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'bootstrap-datetimepicker';
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+
+* {
+	box-sizing: border-box;
+}
+
+.flash {
+  position: absolute;
+  display: block;
+  width: 100%;
+  opacity: 0.95;
+}
+
+.container.main {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
