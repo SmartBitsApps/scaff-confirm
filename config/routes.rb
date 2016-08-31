@@ -1,7 +1,39 @@
 Rails.application.routes.draw do
-  devise_for :users
+ 
+  devise_for :users, module: "users", :path => 'uzivatel', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', confirmation: 'potvrzeni', unlock: 'odblokovani', sign_up: 'registrace' }
+  
+  #devise_for :users, :controllers => { 
+  #  :registrations => "users/registrations",
+  #  :sessions => "users/sessions",
+  #  :passwords => "users/passwords" , 
+  #  :confirmations => "users/confirmations" 
+  #}
+  
+  
+  resources :users, :path => 'uzivatel' do
+    member do
+      resource :account, :path => 'ucet', :only => [:show, :edit, :update]
+    end
+  end
+  
+                                                                        
+  devise_scope :user do
+#    resource :users, :path => 'uzivatel' do
+#    
+#      #resource :account, module: "user", :path => 'uzivatel/ucet', :only => [:show, :edit, :update]
+#    
+#    #end
+#    member do
+#      resource :account
+#    
+      get 'registrace',  to: 'users/registrations#new'
+      get 'prihlaseni',  to: 'users/sessions#new'
+     delete 'odhlaseni', to: 'users/sessions#destroy'
+#    end
+#  end
+  end
+  
   root 'welcome#index'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,78 @@
+<div class="form-wrapper">
+  <div class="form-login col-md-6 col-md-offset-3">
+    <br><br>
+    <p>
+      <h3><%= @account.user.full_name %></h3>
+    </p>
+    <br>
+    <hr>
+    <p>
+      <strong>Titul před jménem:</strong>
+      <%= @account.degree_before %>
+    </p>
+    
+    <p>
+      <strong>Titul za jménem:</strong>
+      <%= @account.degree_after %>
+    </p>
+    
+    <p>
+      <strong>Rodné příjmení:</strong>
+      <%= @account.birth_name %>
+    </p>
+    
+    <p>
+      <strong>Datum narození:</strong>
+      <%= @account.birth_date %>
+    </p>
+    
+    <p>
+      <strong>Pohlaví:</strong>
+      <%= @account.gender %>
+    </p>
+    
+    <p>
+      <strong>Místo narození:</strong>
+      <%= @account.birth_place %>
+    </p>
+    
+    <p>
+      <strong>Rodné číslo:</strong>
+      <%= @account.birth_number %>
+    </p>
+    
+    <p>
+      <strong>Národnost:</strong>
+      <%= @account.nationality %>
+    </p>
+    
+    <p>
+      <strong>Rodinný stav:</strong>
+      <%= @account.family_status %>
+    </p>
+    
+    <p>
+      <strong>Bankovní účet:</strong>
+      <%= @account.bank_acc %>
+    </p>
+    
+    <p>
+      <strong>Zdravotní pojišťovna:</strong>
+      <%= @account.insurance %>
+    </p>
+    
+    <p>
+      <strong>Podmínky použití:</strong>
+      <%= @account.terms %>
+    </p>
+    
+    <p>
+      <strong>Status:</strong>
+      <%= @account.status %>
+    </p>
+    
+    <%= link_to 'Upravit', edit_account_path(@account) %> |
+    <%= link_to 'Zpět', root_path %>
+    <%#= link_to 'Zpět', dashboard_path %>
+  </div>
+</div>
