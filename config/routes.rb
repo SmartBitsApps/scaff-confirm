@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
  
+  
   devise_for :users, module: "users", :path => 'uzivatel', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', confirmation: 'potvrzeni', unlock: 'odblokovani', sign_up: 'registrace' }
   
   #devise_for :users, :controllers => { 
@@ -12,7 +13,9 @@ Rails.application.routes.draw do
   
   resources :users, :path => 'uzivatel' do
     member do
-      resource :account, :path => 'ucet', :only => [:show, :edit, :update]
+      resource :account, :path => 'ucet', :only => [:show, :edit, :update] do
+        resources :addresses
+      end
     end
   end
   

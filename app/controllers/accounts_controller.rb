@@ -77,6 +77,7 @@ class AccountsController < ApplicationController
     def account_params
       params.require(:account).permit(:user_id, :phone_number, :degree_before, :degree_after, :birth_name,
                                       :birth_date, :gender, :birth_place, :birth_number, :nationality,
-                                      :family_status, :bank_acc, :insurance, :terms, :status)
+                                      :family_status, :bank_acc, :insurance, :terms, :status,
+                                      account_addresses_attributes: [:residence, :street, :street_number, :city, :zip_code, :state, :status]))
     end
 end

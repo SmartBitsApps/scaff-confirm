@@ -24,6 +24,7 @@
 
 class Account < ActiveRecord::Base
   belongs_to :user
+  has_many :addresses, as: :addressable, dependent: :destroy
   
   enum degree_before: [:ing, :phdr]
   enum degree_after: [:csc, :dis]
@@ -36,10 +37,17 @@ class Account < ActiveRecord::Base
   
   # set default entries
   after_initialize :set_default_values, :if => :new_record?
+  after_initialize :build_new_address, :if => :new_record?
   
   def set_default_values
     self.status ||= :started
     self.terms  ||= false
+  end
+  
+  def build_new_address
+    #self.addresses ||= 
+    self.addresses.build(residence: 0, status: 0)
+    self.addresses.build(residence: 1, status: 0)
   end
   
 end
