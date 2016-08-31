@@ -19,14 +19,18 @@
     
     <%= f.input :birth_place, label: 'Místo narození', required: false %>
     <%= f.input :birth_number, label: 'Rodné číslo', required: false %>
-    <%= f.input :nationality, label: 'Národnost', required: false %>
+    <%= f.input :nationality, label: 'Národnost', required: false do %>
+      <%= f.select(:nationality, Account.nationalities.keys.map {|n| [n.titleize,n]}, include_blank: true) %>
+    <% end %>
     
     <%= f.input :family_status, label: 'Rodinný stav', required: false do %>
       <%= f.select(:family_status, Account.family_statuses.keys.map {|fs| [fs.titleize,fs]}, include_blank: true) %>
     <% end %>
     
     <%= f.input :bank_acc, label: 'Číslo bankovního účtu', required: false %>
-    <%= f.input :insurance, label: 'Zdravotní pojišťovna', required: false %>
+    <%= f.input :insurance, label: 'Zdravotní pojišťovna', required: false  do %>
+      <%= f.select(:insurance, Account.insurances.keys.map {|i| [i.titleize,i]}, include_blank: true) %>
+    <% end %>
     <%#= f.input :occupation, label: 'Zaměstnanecký poměr', required: false %>
     <%= f.input :terms, as: :boolean, checked_value: true, unchecked_value: false, label: 'Souhlas s podmínkami použití' %>
     

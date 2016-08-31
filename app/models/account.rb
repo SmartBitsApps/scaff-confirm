@@ -30,6 +30,7 @@ class Account < ActiveRecord::Base
   enum gender: { "muž" => 0, "žena" => 1 }
   enum nationality: { "česká" => 0, "slovenská" => 1 }
   enum family_status: { "svobodný/á" => 0, "ženatý/vdaná" => 1, "vdovec/vdova" => 2 }
+  enum insurance: { "111 - VZP" => 0, "201 - VOZP" => 1, "205 - ČPZP" => 2, "207 - OZP" => 3, "209 - ZPŠ" => 4, "211 - ZPMV" => 5, "213 - RBP" => 6 }
   
   enum status: [:started, :completed, :approved]
   
