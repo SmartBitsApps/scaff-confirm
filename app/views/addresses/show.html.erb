@@ -2,7 +2,8 @@
 
 <p>
   <strong>Addressable:</strong>
-  <%= @address.addressable %>
+  <!--#TODO: add name of account owner --> 
+  <%= @address.addressable_id.user.full_name %>
 </p>
 
 <p>

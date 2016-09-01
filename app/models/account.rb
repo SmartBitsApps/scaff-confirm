@@ -25,6 +25,7 @@
 class Account < ActiveRecord::Base
   belongs_to :user
   has_many :addresses, as: :addressable, dependent: :destroy
+  accepts_nested_attributes_for :addresses
   
   enum degree_before: [:ing, :phdr]
   enum degree_after: [:csc, :dis]

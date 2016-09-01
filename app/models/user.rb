@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :validatable
           
   has_one :account, dependent: :destroy
+  #accepts_nested_attributes_for :account
   
   # Devise validates email and password automatically
   #validates_presence_of :first_name

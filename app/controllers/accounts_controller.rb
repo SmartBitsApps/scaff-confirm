@@ -20,6 +20,8 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
+    @permanent_address = Address.where(addressable_id: @account.user_id).where(addressable_type: "Account").where(residence: 0)
+    @postal_address = Address.where(addressable_id: @account.user_id).where(addressable_type: "Account").where(residence: 1)
   end
 
   # POST /accounts
@@ -41,6 +43,7 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1
   # PATCH/PUT /accounts/1.json
   def update
+    binding.pry
     respond_to do |format|
       if @account.update(account_params)
         format.html { redirect_to @account, notice: 'Účet byl úspěšně upraven.' }
@@ -78,6 +81,6 @@ class AccountsController < ApplicationController
       params.require(:account).permit(:user_id, :phone_number, :degree_before, :degree_after, :birth_name,
                                       :birth_date, :gender, :birth_place, :birth_number, :nationality,
                                       :family_status, :bank_acc, :insurance, :terms, :status,
-                                      account_addresses_attributes: [:residence, :street, :street_number, :city, :zip_code, :state, :status])
+                                      addresses_attributes: [:id, :addressable_id, :addressable_type, :residence, :street, :street_number, :city, :zip_code, :state])
     end
 end

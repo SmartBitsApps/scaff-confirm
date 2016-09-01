@@ -39,6 +39,10 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   
+  # better_errors settings
+  BetterErrors::Middleware.allow_ip! ENV['TRUSTED_IP'] if ENV['TRUSTED_IP']
+  config.web_console.whitelisted_ips = ENV['TRUSTED_IP']
+  
   # Devise mailer
   config.action_mailer.default_url_options = { host: ENV['MAIL_HOST_DEV'] }
   config.action_mailer.delivery_method = :smtp

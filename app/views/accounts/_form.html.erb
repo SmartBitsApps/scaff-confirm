@@ -28,11 +28,44 @@
     <% end %>
     
     <%= f.input :bank_acc, label: 'Číslo bankovního účtu', required: false %>
-    <%= f.input :insurance, label: 'Zdravotní pojišťovna', required: false  do %>
+    <%= f.input :insurance, label: 'Zdravotní pojišťovna', required: false do %> <!--#TODO: add bootstrap style -->
       <%= f.select(:insurance, Account.insurances.keys.map {|i| [i.titleize,i]}, include_blank: true) %>
     <% end %>
     <%#= f.input :occupation, label: 'Zaměstnanecký poměr', required: false %>
     <%= f.input :terms, as: :boolean, checked_value: true, unchecked_value: false, label: 'Souhlas s podmínkami použití' %>
+    
+    <h3>Adresa :</h3>
+    <br>
+    
+    <%= f.simple_fields_for :addresses, @permanent_address do |address_form| %>
+      
+          <h3>Adresa trvalého pobytu</h3>
+      <br>
+      <%#= address_form.input_field :addressable_id, value: @account.user_id, type: "hidden" %>
+      <%#= address_form.input_field :addressable_type, value: "Account", type: "hidden" %>
+      <%= address_form.input :street, label: 'Ulice', required: false %>
+      <%= address_form.input :street_number, label: 'Číslo popisné', required: false %>
+      <%= address_form.input :city, label: 'Město', required: false %>
+      <%= address_form.input :zip_code, label: 'Směrovací číslo', required: false %>
+      <%= address_form.input :state, label: 'Stát', required: false %>
+    <% end %>
+    
+    <br>
+    
+    <%= f.simple_fields_for :addresses, @postal_address do |address_form| %>
+      
+          <h3>Adresa k zasílání pošty</h3>
+      <br>
+      <%#= address_form.input_field :addressable_id, value: @account.user_id, type: "hidden" %>
+      <%#= address_form.input_field :addressable_type, value: "Account", type: "hidden" %>
+      <%= address_form.input :street, label: 'Ulice', required: false %>
+      <%= address_form.input :street_number, label: 'Číslo popisné', required: false %>
+      <%= address_form.input :city, label: 'Město', required: false %>
+      <%= address_form.input :zip_code, label: 'Směrovací číslo', required: false %>
+      <%= address_form.input :state, label: 'Stát', required: false %>
+    <% end %>
+    
+    
     
     
   </div>
