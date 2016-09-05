@@ -26,6 +26,7 @@ class Account < ActiveRecord::Base
   belongs_to :user
   has_many :addresses, as: :addressable, dependent: :destroy
   accepts_nested_attributes_for :addresses
+  #before_validation :check_for_filled_all_columns, only: [:update]
   
   enum degree_before: [:ing, :phdr]
   enum degree_after: [:csc, :dis]
@@ -50,5 +51,13 @@ class Account < ActiveRecord::Base
     self.addresses.build(residence: 0, status: 0)
     self.addresses.build(residence: 1, status: 0)
   end
+  
+  private
+  
+  #def check_for_filled_all_columns
+  #  self.attributes.each do |attr|
+  #    return false if self[attr].nil?
+  #  end
+  #end
   
 end

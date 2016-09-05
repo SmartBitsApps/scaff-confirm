@@ -21,4 +21,14 @@ class Address < ActiveRecord::Base
   enum residence: [:permanent, :postal]
   enum status: [:inactive, :active]
   
+  
+  
+  #validates_presence_of :street, unless: :residence?
+  #validates_presence_of :street, :if => Proc.new { |user| user.signup_step > 2 }
+#  validates_presence_of :street, reject_if: proc { |attributes| attributes['street'].blank? }
+#  validates_presence_of :street_number, :unless => :street?
+#  validates_presence_of :city, :unless => :street?
+#  validates_presence_of :zip_code, :unless => :street?
+  
+  
 end

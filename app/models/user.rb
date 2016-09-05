@@ -37,8 +37,8 @@ class User < ActiveRecord::Base
   #accepts_nested_attributes_for :account
   
   # Devise validates email and password automatically
-  #validates_presence_of :first_name
-  #validates_presence_of :last_name
+  validates_presence_of :first_name
+  validates_presence_of :last_name
   
   enum role: [:pending, :user, :manager, :admin]
   enum status: [:banned, :inactive, :active]

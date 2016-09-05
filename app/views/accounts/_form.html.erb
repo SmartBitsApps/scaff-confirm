@@ -1,43 +1,47 @@
-<%= simple_form_for(@account) do |f| %>
+<%= simple_form_for @account, html: {class: 'form-horizontal'}, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :vertical_radio_and_checkboxes,
+radio_buttons: :vertical_radio_and_checkboxes, file: :vertical_file_input, boolean: :horizontal_boolean } do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.association :user, :value => :user_id, as: :hidden %>
     
     <%= f.input :degree_before, label: 'Titul před', required: false do %>
-      <%= f.select(:degree_before, Account.degree_befores.keys.map {|db| [db.titleize,db]}, include_blank: true) %>
+      <%= f.select(:degree_before, Account.degree_befores.keys.map {|db| [db.titleize,db]}, {include_blank: true}, { :class => 'col-xs-12 form-control string optional' }) %>
     <% end %>
     
     <%= f.input :degree_after, label: 'Titul za', required: false do %>
-      <%= f.select(:degree_after, Account.degree_afters.keys.map {|da| [da.titleize,da]}, include_blank: true) %>
+      <%= f.select(:degree_after, Account.degree_afters.keys.map {|da| [da.titleize,da]}, {include_blank: true}, { :class => 'col-xs-12 form-control string optional' }) %>
     <% end %>
     
     <%= f.input :birth_name, label: 'Rodné příjmení', required: false %>
     <%= f.input :birth_date, label: 'Datum narození', required: false, input_html: { id: 'datetimepicker3' } %>
     
-    <%= f.input :gender, :label => "Pohlaví", as: :radio_buttons, collection: ['muž', 'žena'], wrapper: :vertical_radio_and_checkboxes %>
+    <%= f.input :gender, :label => "Pohlaví", as: :radio_buttons, collection: ['muž', 'žena'], wrapper: :horizontal_radio_and_checkboxes %>
     
     <%= f.input :birth_place, label: 'Místo narození', required: false %>
     <%= f.input :birth_number, label: 'Rodné číslo', required: false %>
     <%= f.input :nationality, label: 'Národnost', required: false do %>
-      <%= f.select(:nationality, Account.nationalities.keys.map {|n| [n.titleize,n]}, include_blank: true) %>
+      <%= f.select(:nationality, Account.nationalities.keys.map {|n| [n.downcase,n]}, {include_blank: true}, { :class => 'col-xs-12 form-control string optional' }) %>
     <% end %>
     
     <%= f.input :family_status, label: 'Rodinný stav', required: false do %>
-      <%= f.select(:family_status, Account.family_statuses.keys.map {|fs| [fs.titleize,fs]}, include_blank: true) %>
+      <%= f.select(:family_status, Account.family_statuses.keys.map {|fs| [fs.downcase,fs]}, {include_blank: true}, { :class => 'col-xs-12 form-control string optional' }) %>
     <% end %>
     
     <%= f.input :bank_acc, label: 'Číslo bankovního účtu', required: false %>
-    <%= f.input :insurance, label: 'Zdravotní pojišťovna', required: false do %> <!--#TODO: add bootstrap style -->
-      <%= f.select(:insurance, Account.insurances.keys.map {|i| [i.titleize,i]}, include_blank: true) %>
+    <%= f.input :insurance, label: 'Zdravotní pojišťovna', required: false, placeholder: 'Vyberte svou pojišťovnu' do %> <!--#TODO: add placeholder -->
+      <%= f.select(:insurance, Account.insurances.keys.map {|i| [i.titleize.upcase,i]}, {include_blank: true}, { :class => 'col-xs-12 form-control string optional' }) %>
     <% end %>
+    <hr>
     <%#= f.input :occupation, label: 'Zaměstnanecký poměr', required: false %>
     <%= f.input :terms, as: :boolean, checked_value: true, unchecked_value: false, label: 'Souhlas s podmínkami použití' %>
     
-    <h3>Adresa :</h3>
     <br>
+    <hr>
     
-    <%= f.simple_fields_for :addresses, @permanent_address do |address_form| %>
+    <%#= f.simple_fields_for :addresses, @permanent_address do |address_form| %>
+    <%#= f.simple_fields_for @permanent_address do |address_form| %>
+    <%= f.simple_fields_for :addresses, f.object.addresses.find_by(residence: 0) do |address_form| %>
       
           <h3>Adresa trvalého pobytu</h3>
       <br>
@@ -51,18 +55,21 @@
     <% end %>
     
     <br>
-    
-    <%= f.simple_fields_for :addresses, @postal_address do |address_form| %>
-      
-          <h3>Adresa k zasílání pošty</h3>
-      <br>
-      <%#= address_form.input_field :addressable_id, value: @account.user_id, type: "hidden" %>
-      <%#= address_form.input_field :addressable_type, value: "Account", type: "hidden" %>
-      <%= address_form.input :street, label: 'Ulice', required: false %>
-      <%= address_form.input :street_number, label: 'Číslo popisné', required: false %>
-      <%= address_form.input :city, label: 'Město', required: false %>
-      <%= address_form.input :zip_code, label: 'Směrovací číslo', required: false %>
-      <%= address_form.input :state, label: 'Stát', required: false %>
+    <%# if @postal_address.active? %>
+      <%#= f.simple_fields_for :addresses, @postal_address do |address_form| %>
+      <%#= f.simple_fields_for @postal_address do |address_form| %>
+      <%= f.simple_fields_for :addresses, f.object.addresses.find_by(residence: 1) do |address_form| %>
+        
+            <h3>Korespondenční adresa</h3>
+        <br>
+        <%#= address_form.input_field :addressable_id, value: @account.user_id, type: "hidden" %>
+        <%#= address_form.input_field :addressable_type, value: "Account", type: "hidden" %>
+        <%= address_form.input :street, label: 'Ulice', required: false %>
+        <%= address_form.input :street_number, label: 'Číslo popisné', required: false %>
+        <%= address_form.input :city, label: 'Město', required: false %>
+        <%= address_form.input :zip_code, label: 'Směrovací číslo', required: false %>
+        <%= address_form.input :state, label: 'Stát', required: false %>
+      <%# end %>
     <% end %>
     
     

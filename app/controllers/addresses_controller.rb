@@ -1,6 +1,7 @@
 class AddressesController < ApplicationController
+  
   before_action :set_address, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /addresses
   # GET /addresses.json
   def index
@@ -44,6 +45,8 @@ class AddressesController < ApplicationController
   # PATCH/PUT /addresses/1.json
   def update
     respond_to do |format|
+      
+      #check_address
       if @address.update(address_params)
         format.html { redirect_to @address, notice: 'Address was successfully updated.' }
         format.json { render :show, status: :ok, location: @address }
