@@ -28,11 +28,12 @@ class Account < ActiveRecord::Base
   accepts_nested_attributes_for :addresses
   #before_validation :check_for_filled_all_columns, only: [:update]
   
-  enum degree_before: [:ing, :phdr]
-  enum degree_after: [:csc, :dis]
+  
+  enum degree_before: { "Ing." => 0, "Mgr." => 1, "Bc." => 2, "PhDr." => 3, "MUDr." => 4, "JUDr." => 5 }
+  enum degree_after: { "DiS." => 0, "Ph.D." => 1, "MBA" => 2, "CSc." => 3 }
   enum gender: { "muž" => 0, "žena" => 1 }
   enum nationality: { "česká" => 0, "slovenská" => 1 }
-  enum family_status: { "svobodný/á" => 0, "ženatý/vdaná" => 1, "vdovec/vdova" => 2 }
+  enum family_status: { "svobodný/á" => 0, "ženatý/vdaná" => 1, "vdovec/vdova" => 2, "rozvedený/á" => 3, "druh/družka" => 4, "registrované partnerství" => 5 }
   enum insurance: { "111 - VZP" => 0, "201 - VOZP" => 1, "205 - ČPZP" => 2, "207 - OZP" => 3, "209 - ZPŠ" => 4, "211 - ZPMV" => 5, "213 - RBP" => 6 }
   
   enum status: [:started, :completed, :approved]

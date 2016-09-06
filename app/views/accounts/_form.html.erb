@@ -6,11 +6,11 @@ radio_buttons: :vertical_radio_and_checkboxes, file: :vertical_file_input, boole
     <%= f.association :user, :value => :user_id, as: :hidden %>
     
     <%= f.input :degree_before, label: 'Titul před', required: false do %>
-      <%= f.select(:degree_before, Account.degree_befores.keys.map {|db| [db.titleize,db]}, {include_blank: true}, { :class => 'col-xs-12 form-control string optional' }) %>
+      <%= f.select(:degree_before, Account.degree_befores.keys.map {|db| [db,db]}, {include_blank: true}, { :class => 'col-xs-12 form-control string optional' }) %>
     <% end %>
     
     <%= f.input :degree_after, label: 'Titul za', required: false do %>
-      <%= f.select(:degree_after, Account.degree_afters.keys.map {|da| [da.titleize,da]}, {include_blank: true}, { :class => 'col-xs-12 form-control string optional' }) %>
+      <%= f.select(:degree_after, Account.degree_afters.keys.map {|da| [da,da]}, {include_blank: true}, { :class => 'col-xs-12 form-control string optional' }) %>
     <% end %>
     
     <%= f.input :birth_name, label: 'Rodné příjmení', required: false %>
