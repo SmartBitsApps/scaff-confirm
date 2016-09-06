@@ -29,7 +29,7 @@ radio_buttons: :vertical_radio_and_checkboxes, file: :vertical_file_input, boole
     <% end %>
     
     <%= f.input :bank_acc, label: 'Číslo bankovního účtu', required: false %>
-    <%= f.input :insurance, label: 'Zdravotní pojišťovna', required: false, placeholder: 'Vyberte svou pojišťovnu' do %> <!--#TODO: add placeholder -->
+    <%= f.input :insurance, label: 'Zdravotní pojišťovna', placeholder: 'Vyberte svou pojišťovnu', required: false do %> <!--#TODO: add placeholder -->
       <%= f.select(:insurance, Account.insurances.keys.map {|i| [i.titleize.upcase,i]}, {include_blank: true}, { :class => 'col-xs-12 form-control string optional' }) %>
     <% end %>
     <hr>

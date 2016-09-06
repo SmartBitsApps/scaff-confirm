@@ -62,12 +62,31 @@
     </p>
     
     <p>
-      <strong>Podmínky použití:</strong>
+      <strong>Adresa trvalého pobytu:</strong><br>
+      <%= @permanent_address.street + " " +
+          @permanent_address.street_number + ", " +
+          @permanent_address.city + ", " +
+          @permanent_address.zip_code + ", " +
+          @permanent_address.state %>
+    </p>
+    
+    <p>
+      <strong>Korespondenční adresa:</strong><br>
+      <%= @postal_address.street + " " +
+          @postal_address.street_number + ", " +
+          @postal_address.city + ", " +
+          @postal_address.zip_code + ", " +
+          @postal_address.state %>
+    </p>
+    
+    
+    <p>
+      <strong>Podmínky použití:</strong> <!--#TODO: add icons for true/false -->
       <%= @account.terms %>
     </p>
     
     <p>
-      <strong>Status:</strong>
+      <strong>Status:</strong> <!--#TODO: make visible only for managers/admins -->
       <%= @account.status %>
     </p>
     

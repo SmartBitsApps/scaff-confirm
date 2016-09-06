@@ -11,6 +11,8 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
+    @permanent_address = @account.addresses.find_by(residence: 0)
+    @postal_address = @account.addresses.find_by(residence: 1)
   end
 
   # GET /accounts/new
@@ -78,7 +80,8 @@ class AccountsController < ApplicationController
     def set_account
       #TODO: change this for admin and manager accounts
       if current_user #!current_admin || !current_manager
-        @account = Account.find_by(user_id: current_user.id)
+        @account = current_user.account
+        #@account = Account.find_by(user_id: current_user.id)
       else
         @account = Account.find(params[:id])
       end
@@ -89,7 +92,7 @@ class AccountsController < ApplicationController
       params.require(:account).permit(:user_id, :phone_number, :degree_before, :degree_after, :birth_name,
                                       :birth_date, :gender, :birth_place, :birth_number, :nationality,
                                       :family_status, :bank_acc, :insurance, :terms, :status,
-                                      addresses_attributes: [:id, :addressable_id, :addressable_type, :residence, :street, :street_number, :city, :zip_code, :state]) #:id, :addressable_id, :addressable_type, 
+                                      addresses_attributes: [:id, :residence, :street, :street_number, :city, :zip_code, :state]) #:id, :addressable_id, :addressable_type, 
     end
 
 end
