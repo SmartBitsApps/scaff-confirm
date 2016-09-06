@@ -22,6 +22,8 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
+    @permanent_address = @account.addresses.find_by(residence: 0)
+    @postal_address = @account.addresses.find_by(residence: 1)
 #    @permanent_address = @account.addresses.find_by(residence: 0)
 #    @postal_address = @account.addresses.find_by(residence: 1)
     #@permanent_address = Address.where(addressable_id: @account.user_id).where(addressable_type: "Account").where(residence: 0).first
@@ -54,8 +56,36 @@ class AccountsController < ApplicationController
     #if @account.check_for_filled_all_columns === true
     #  @account.address[0].status = 1
     #end
+    
+    
+    
     respond_to do |format|
       if @account.update(account_params)
+        
+        @permanent_address = @account.addresses.find_by(residence: 0)
+        @postal_address = @account.addresses.find_by(residence: 1)
+        
+        if !@permanent_address.street.blank? && !@permanent_address.street_number.blank? &&
+          !@permanent_address.city.blank? && !@permanent_address.zip_code.blank? && !@permanent_address.state.blank?
+          @permanent_address.status = 1
+          @permanent_address.save!
+        else
+          @permanent_address.status = 0
+          @permanent_address.save!
+        end
+        
+        if !@postal_address.street.blank? && !@postal_address.street_number.blank? &&
+            !@postal_address.city.blank? && !@postal_address.zip_code.blank? && !@postal_address.state.blank?
+          @postal_address.status = 1
+          @postal_address.save!
+        else
+          @postal_address.status = 0
+          @postal_address.save!
+        end
+        
+        
+        
+        
         format.html { redirect_to @account, notice: 'Účet byl úspěšně upraven.' }
         format.json { render :show, status: :ok, location: @account }
       else

@@ -62,7 +62,7 @@
     </p>
     
     <p>
-      <strong>Adresa trvalého pobytu:</strong><br>
+      <strong>Adresa trvalého pobytu: <%= @permanent_address.status %></strong><br>
       <%= @permanent_address.street + " " +
           @permanent_address.street_number + ", " +
           @permanent_address.city + ", " +
@@ -71,7 +71,7 @@
     </p>
     
     <p>
-      <strong>Korespondenční adresa:</strong><br>
+      <strong>Korespondenční adresa: <%= @postal_address.status %></strong><br>
       <%= @postal_address.street + " " +
           @postal_address.street_number + ", " +
           @postal_address.city + ", " +
