@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
  
   
+  devise_for :admins, module: "admins", path: 'master', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', unlock: 'odblokovani' }
   devise_for :managers, module: "managers", path: 'manazer', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', confirmation: 'potvrzeni', unlock: 'odblokovani' }
   devise_for :users, module: "users", path: 'uzivatel', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', confirmation: 'potvrzeni', unlock: 'odblokovani', sign_up: 'registrace' }
   
@@ -21,30 +22,26 @@ Rails.application.routes.draw do
   end
   
   
+  devise_scope :admin do
+    get 'master',  to: 'admins/sessions#new'
+    delete 'master/odhlaseni', to: 'admins/sessions#destroy'
+  end
+  
   devise_scope :manager do
-      get 'registrace',  to: 'welcome#index'
-      get 'man',  to: 'managers/sessions#new'
-     delete 'odhlaseni', to: 'managers/sessions#destroy'
+    get 'man',  to: 'managers/sessions#new'
+    delete 'man/odhlaseni', to: 'managers/sessions#destroy'
   end
   
                                                                         
   devise_scope :user do
-#    resource :users, :path => 'uzivatel' do
-#    
-#      #resource :account, module: "user", :path => 'uzivatel/ucet', :only => [:show, :edit, :update]
-#    
-#    #end
-#    member do
-#      resource :account
-#    
-      get 'registrace',  to: 'users/registrations#new'
-      get 'prihlaseni',  to: 'users/sessions#new'
-     delete 'odhlaseni', to: 'users/sessions#destroy'
-#    end
-#  end
+    get 'registrace',  to: 'users/registrations#new'
+    get 'prihlaseni',  to: 'users/sessions#new'
+    delete 'odhlaseni', to: 'users/sessions#destroy'
   end
   
   root 'welcome#index'
+  
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
