@@ -17,6 +17,7 @@
 #
 
 class Address < ActiveRecord::Base
+  belongs_to :addressable, polymorphic: true
   
   enum residence: [:permanent, :postal]
   enum status: [:inactive, :active]

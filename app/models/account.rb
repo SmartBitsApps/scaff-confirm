@@ -49,7 +49,7 @@ class Account < ActiveRecord::Base
   
   def build_new_address
     #self.addresses ||= 
-    self.addresses.build(residence: 0, status: 0)
+    self.addresses.build(residence: 0, status: 1)
     self.addresses.build(residence: 1, status: 0)
   end
   

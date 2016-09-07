@@ -50,16 +50,17 @@
       <strong>Zdravotní pojišťovna:</strong>
       <%= @account.insurance %>
     </p>
-    
-    <p>
-      <strong>Adresa trvalého pobytu: <%= @permanent_address.status %></strong><br>
-      <%= @permanent_address.street + " " +
-          @permanent_address.street_number + ", " +
-          @permanent_address.city + ", " +
-          @permanent_address.zip_code + ", " +
-          @permanent_address.state %>
-    </p>
-    
+    <% if @permanent_address.street.present? && @permanent_address.city.present? && @permanent_address.active? %>
+      <p>
+        <strong>Adresa trvalého pobytu: <%= @permanent_address.status %></strong><br>
+        <%= @permanent_address.street + " " +
+            @permanent_address.street_number + ", " +
+            @permanent_address.city + ", " +
+            @permanent_address.zip_code + ", " +
+            @permanent_address.state %>
+      </p>
+    <% end %>
+    <% if @postal_address.street.present? && @postal_address.city.present? && @postal_address.active? %>
     <p>
       <strong>Korespondenční adresa: <%= @postal_address.status %></strong><br>
       <%= @postal_address.street + " " +
@@ -68,7 +69,7 @@
           @postal_address.zip_code + ", " +
           @postal_address.state %>
     </p>
-    
+    <% end %>
     
     <p>
       <strong>Podmínky použití:</strong> <!--#TODO: add icons for true/false -->
