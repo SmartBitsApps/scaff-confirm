@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
  
   
-  devise_for :users, module: "users", :path => 'uzivatel', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', confirmation: 'potvrzeni', unlock: 'odblokovani', sign_up: 'registrace' }
+  devise_for :managers, module: "managers", path: 'manazer', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', confirmation: 'potvrzeni', unlock: 'odblokovani' }
+  devise_for :users, module: "users", path: 'uzivatel', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', confirmation: 'potvrzeni', unlock: 'odblokovani', sign_up: 'registrace' }
   
   #devise_for :users, :controllers => { 
   #  :registrations => "users/registrations",
@@ -17,6 +18,13 @@ Rails.application.routes.draw do
         resources :addresses
       end
     end
+  end
+  
+  
+  devise_scope :manager do
+      get 'registrace',  to: 'welcome#index'
+      get 'man',  to: 'managers/sessions#new'
+     delete 'odhlaseni', to: 'managers/sessions#destroy'
   end
   
                                                                         
