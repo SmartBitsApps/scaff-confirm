@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
  
   
-  devise_for :admins, module: "admins", path: 'master', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', unlock: 'odblokovani' }
-  devise_for :managers, module: "managers", path: 'manazer', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', confirmation: 'potvrzeni', unlock: 'odblokovani' }
+  #devise_for :admins, module: "admins", path: 'master', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', unlock: 'odblokovani' }
+  #devise_for :managers, module: "managers", path: 'manazer', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', confirmation: 'potvrzeni', unlock: 'odblokovani' }
   devise_for :users, module: "users", path: 'uzivatel', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', confirmation: 'potvrzeni', unlock: 'odblokovani', sign_up: 'registrace' }
   
   #devise_for :users, :controllers => { 
@@ -22,22 +22,22 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :managers, :path => 'manazer' do
-    member do
-      
-    end
-  end
+  #resources :managers, :path => 'manazer' do
+  #  member do
+  #    
+  #  end
+  #end
   
   
-  devise_scope :admin do
-    get 'master',  to: 'admins/sessions#new'
-    delete 'master/odhlaseni', to: 'admins/sessions#destroy'
-  end
-  
-  devise_scope :manager do
-    get 'man',  to: 'managers/sessions#new'
-    delete 'man/odhlaseni', to: 'managers/sessions#destroy'
-  end
+  #devise_scope :admin do
+  #  get 'master',  to: 'admins/sessions#new'
+  #  delete 'master/odhlaseni', to: 'admins/sessions#destroy'
+  #end
+  #
+  #devise_scope :manager do
+  #  get 'man',  to: 'managers/sessions#new'
+  #  delete 'man/odhlaseni', to: 'managers/sessions#destroy'
+  #end
   
                                                                         
   devise_scope :user do

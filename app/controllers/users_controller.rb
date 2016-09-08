@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_filter :authenticate_user!
-  after_action :verify_authorized
+  #after_action :verify_authorized
   
   def index
     
