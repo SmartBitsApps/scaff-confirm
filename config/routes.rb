@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   
   
-  resources :users, :path => 'uzivatele', :controller => 'users' do
+  resources :users, :path => 'uzivatel', :controller => 'users' do
     member do
       resource :account, :path => 'ucet', :only => [:show, :edit, :update] do
         resources :addresses

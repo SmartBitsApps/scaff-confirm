@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_filter :authenticate_user!
-  #after_action :verify_authorized
+  after_action :verify_authorized
   
   def index
     
@@ -44,9 +44,15 @@ class UsersController < ApplicationController
     end
 
     def secure_params
-      params.require(:user).permit(:role, :avatar, :first_name, :last_name, :degree_before, :degree_after, :birth_name, 
-                                  :birth_date, :gender, :birth_number, :birth_place, :nationality, 
-                                  :family_status, :status)
+      #TODO: add pundit for role (for admin and manager)
+      if current_user.role == "admin"
+        params.require(:user).permit(:role, :status, :first_name, :last_name) #, :email
+      else
+        params.require(:user).permit(:first_name, :last_name) #,email
+      end
+      
+      
+      
     end
   
 end

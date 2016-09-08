@@ -1,0 +1,21 @@
+<h3>User</h3>
+
+
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <%# if @user.avatar? %>
+        <%#= image_tag @user.avatar.url(:small) %>
+        <!-- TODO pridat else a cestu k defaultnimu avataru-->
+      <%# end %>
+      <div class="caption">
+        <h3><%= @user.full_name if @user %></h3>
+        <p>Email: <%= @user.email if @user.email %></p>
+        <p>
+          <%= link_to "Zobrazit", user_path(@user), class: "btn btn-primary" %>
+          <%= link_to "Upravit", edit_user_path(@user), class: "btn btn-default" %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

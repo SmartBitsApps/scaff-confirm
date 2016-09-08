@@ -1,0 +1,69 @@
+<div class="form-wrapper">
+  <div class="col-md-12"><p>
+    <%= link_to "Zpět", :back, class: "btn btn-primary btn-lg" %>
+  </p>
+</div>
+	<div class="form-login col-md-12">
+	  <h2>Upravit účet : <%= @user.full_name %></h2>
+	  <br>
+	  <hr>
+	  <%= simple_form_for @user, :html => {:method => :put, :multipart => true} do |f| %>
+      <%= f.error_notification %>
+      <div class="form-inputs">
+		    <div class="col-md-6">
+		    	<div class="row" id="avatar">
+		    	  <!-- TODO Vycentrovat obrazek i na sm rozlireni -->
+		    		<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+		    			<%#= f.hidden_field :avatar_cache %>
+		    			
+		    			<%# if !@user.avatar.file.nil? %>
+            			<%#= image_tag(@user.avatar.url(:medium), alt: "Profile Picture", class: 'img-circle') %>
+            	<%# end %>
+            	
+            	<br>
+            	<!-- TODO zobrazit tlačítko "změnit" po kliknutí, upload nového avataru-->
+              <%#= f.file_field :avatar %>
+            	
+            	<br><br>
+		    		</div>
+		    	</div>
+		    	<div class="row" id="name_fields">
+		    	  <div class="col-md-10 col-md-offset-1">
+		    		  <hr>
+              <%= f.input :first_name, required: false, label: 'Jméno', autofocus: true %>
+              <%= f.input :last_name, required: false, label: 'Příjmení' %>
+            </div>
+		    	</div>
+		    	<div class="row" id="communication">
+		    	  <div class="col-md-10 col-md-offset-1">
+		    		  <hr>
+              <%= f.input :email, disabled: true %>
+              <!-- TODO ZDE PŘIDAT phone_number -->
+              <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
+              <%= f.select(:status, User.statuses.keys.map {|status| [status.titleize,status]}) %>
+            </div>
+		    	</div>
+		    </div>
+		    <div class="col-md-6">
+		      
+		    	
+		    	<div class="row" id="personal">
+		    	  <div class="col-md-10 col-md-offset-1">
+		    		  <hr>
+		    		  <p>Status : <%= @user.status %></p>
+		    		  <p>Role : <%= @user.role %></p>
+            </div>
+		    	</div>
+		    </div>
+		    <div class="col-md-10 col-md-offset-1"><hr></div>
+		    <div class="col-md-6 col-md-offset-3">
+		      <br>
+		      
+		      <div class="form-actions">
+            <%= f.button :submit, "Uložit změny", class: "btn btn-primary btn-lg btn-block" %>
+          </div>
+        </div>
+		  </div>
+		<% end %>
+	</div>
+</div>
