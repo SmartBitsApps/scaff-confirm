@@ -9,7 +9,7 @@ gem 'devise', '~> 4.1', '>= 4.1.1'
 #gem 'wicked', '~> 1.3'
 
 #for authorization
-#gem 'pundit', '~> 1.1'
+gem 'pundit', '~> 1.1'
 
 ## for design
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'

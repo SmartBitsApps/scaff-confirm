@@ -11,13 +11,20 @@ Rails.application.routes.draw do
   #  :passwords => "users/passwords" , 
   #  :confirmations => "users/confirmations" 
   #}
+
   
   
-  resources :users, :path => 'uzivatel' do
+  resources :users, :path => 'uzivatele', :controller => 'users' do
     member do
       resource :account, :path => 'ucet', :only => [:show, :edit, :update] do
         resources :addresses
       end
+    end
+  end
+  
+  resources :managers, :path => 'manazer' do
+    member do
+      
     end
   end
   
@@ -40,7 +47,6 @@ Rails.application.routes.draw do
   end
   
   root 'welcome#index'
-  
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

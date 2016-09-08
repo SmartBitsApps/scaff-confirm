@@ -40,17 +40,18 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name
   validates_presence_of :last_name
   
-  enum role: [:pending, :user, :manager, :admin]
+  
   enum status: [:banned, :inactive, :active]
+  enum role: [:pending, :user, :manager, :admin]
   
   # sets default settings and build account for user
-  after_initialize :set_default_role_and_status, :if => :new_record?
+  after_initialize :set_default_status_and_role, :if => :new_record?
   after_initialize :build_new_account, :if => :new_record?
  
   
-  def set_default_role_and_status
-    #self.role ||= :pending
+  def set_default_status_and_role
     self.status ||= :inactive
+    self.role ||= :pending
   end
   
   def build_new_account

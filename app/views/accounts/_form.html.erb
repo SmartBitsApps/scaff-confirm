@@ -14,7 +14,7 @@ radio_buttons: :vertical_radio_and_checkboxes, file: :vertical_file_input, boole
     <% end %>
     
     <%= f.input :birth_name, label: 'Rodné příjmení', required: false %>
-    <%= f.input :birth_date, label: 'Datum narození', required: false, input_html: { id: 'datetimepicker3' } %>
+    <%= f.input :birth_date, label: 'Datum narození', required: false, input_html: { id: 'datetimepicker1' } %>
     
     <%= f.input :gender, :label => "Pohlaví", as: :radio_buttons, collection: ['muž', 'žena'], wrapper: :horizontal_radio_and_checkboxes %>
     
@@ -85,13 +85,13 @@ radio_buttons: :vertical_radio_and_checkboxes, file: :vertical_file_input, boole
   
   <script>
     $(function () {
-      $('#datetimepicker3').datetimepicker({
+      $('#datetimepicker1').datetimepicker({
         locale: 'cs',
-        viewMode: 'years',
-        //minDate:`1/1/1920`,
-        //maxDate:`1/1/2002`,
-        //yearRange: "-15:-80",
-        format: 'DD.MM.YYYY'
+        format: 'L',
+        viewMode: 'decades'
+        //locale: 'cs',
+        //viewMode: 'years',
+        //format: 'DD.MM.YYYY'
       });
       $('#datetimepicker4').datetimepicker({
         locale: 'cs',

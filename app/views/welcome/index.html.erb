@@ -1,2 +1,24 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+
+<p>
+  <% if user_signed_in? %>
+    <%= "#{current_user.class.to_s}'s email: " + current_user.email %>
+  <% elsif manager_signed_in? %>
+    <%= "#{current_manager.class.to_s}'s email: " + current_manager.email %>
+  <% elsif admin_signed_in? %>
+    <%= "#{current_admin.class.to_s}'s email: " + current_admin.email %>
+  <% end %>
+</p>
+
+<% if admin_signed_in? %>
+    <h1>Welcome Admin!</h1>
+    <%= link_to "Like", managers_path(@manager), method: :post, remote: true %>
+    <%# simple_form_for :managers, Manager.build() %>
+    <%#= simple_form_for(:managers, as: :admin, url: managers_path(resource_name), html: { method: :post }) do |f| %>
+    
+    <%# end %>
+    
+<% elsif manager_signed_in? %>
+    <h1>Welcome Manager!</h1>
+<% elsif user_signed_in? %>
+    <h1>Welcome User!</h1>
+<% end %>

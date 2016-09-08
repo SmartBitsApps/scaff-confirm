@@ -55,7 +55,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><%= link_to "Link1", '#' %></li>
+            <li class="active"><%= link_to "Uživatelé", users_path %></li>
             <li><%= link_to "Link2", '#' %></li>
             <li><%= link_to "Link3", '#' %></li>
           </ul>
@@ -71,6 +71,14 @@
                 </ul>
               </li>
             <% else %>
+              <% if user_signed_in? %>
+                <li><%= link_to "Odhlásit se /user/", destroy_user_session_path, method: "delete" %></li>
+              <% elsif manager_signed_in? %>
+                <li><%= link_to "Odhlásit se /manager/", destroy_manager_session_path, method: "delete" %></li>
+              <% elsif admin_signed_in? %>
+                <li><%= link_to "Odhlásit se /admin/", destroy_admin_session_path, method: "delete" %></li>
+              <% end %>
+              
               <li class="nav-link"><%= link_to "Přihlášení", new_user_session_path %></li>
               <li class="nav-link"><%= link_to "Registrace", new_user_registration_path %></li>
             <% end %>
