@@ -1,0 +1,38 @@
+<br>
+<h1>Přehled mých registrací na akce</h1>
+
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th>Akce</th>
+      <th>Začátek</th>
+      <th>Konec</th>
+      <th>Manažer</th>
+      <th>Pozice</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @my_subscriptions.each do |event| %>
+      <tr>
+        <td><%= event.brigade.event.title %></td>
+        
+        
+        <td><%= event.brigade.event.start_date %></td>
+        <td><%= event.brigade.event.end_date %></td>
+        <!-- TODO: check before delete user if he is event manager + add link_to for message and phone contact -->
+        <td><%= User.find_by(id: event.brigade.event.manager).full_name %></td>
+        <td><%= event_brigade_sum(event.brigade.event) %></td>
+        <td><%= link_to 'Detail', event.brigade.event %></td>
+        <% if current_user.role == "admin" || current_user.role == "manager" %>
+          <td><%= link_to 'Upravit', edit_event_path(event.brigade.event) %></td>
+          <td><%= link_to 'Smazat', event.brigade.event, method: :delete, data: { confirm: 'Jste si jisti?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    
+  </tbody>
+</table>
+
+<br>
+

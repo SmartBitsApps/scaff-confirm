@@ -47,10 +47,14 @@ before_action :configure_account_update_params, only: [:update]
   # If you have extra params to permit, append them to the sanitizer.
   #TODO: add if for admin/manager with :status key
   def configure_account_update_params
+    if current_user.role == "admin"
     #devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :first_name, :last_name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :password, :password_confirmation])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :password, :password_confirmation])
+    else
     #for admin/manager
-    #devise_parameter_sanitizer.permit(:account_update, keys: [:role, :status, :first_name, :last_name, :password, :password_confirmation])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:role, :status, :first_name, :last_name, :password, :password_confirmation])
+    end
+    
   end
 
   # The path used after sign up.

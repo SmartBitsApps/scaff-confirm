@@ -119,10 +119,17 @@ class AccountsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:user_id, :phone_number, :degree_before, :degree_after, :birth_name,
+      if current_user == "admin"
+        params.require(:account).permit(:user_id, :phone_number, :degree_before, :degree_after, :birth_name,
                                       :birth_date, :gender, :birth_place, :birth_number, :nationality,
                                       :family_status, :bank_acc, :insurance, :terms, :status,
                                       addresses_attributes: [:id, :residence, :street, :street_number, :city, :zip_code, :state]) #:id, :addressable_id, :addressable_type, 
+      else
+        params.require(:account).permit(:user_id, :phone_number, :degree_before, :degree_after, :birth_name,
+                                      :birth_date, :gender, :birth_place, :birth_number, :nationality,
+                                      :family_status, :bank_acc, :insurance, :terms,
+                                      addresses_attributes: [:id, :residence, :street, :street_number, :city, :zip_code, :state])
+      end
     end
 
 end

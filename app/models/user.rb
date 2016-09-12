@@ -22,9 +22,10 @@
 #  locked_at              :datetime
 #  first_name             :string
 #  last_name              :string
-#  status                 :boolean
+#  status                 :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  role                   :integer
 #
 
 class User < ActiveRecord::Base
