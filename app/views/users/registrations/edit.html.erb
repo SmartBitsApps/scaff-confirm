@@ -1,25 +1,30 @@
-<h2>Upravit účet</h2>
-
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :first_name, label: 'Jméno', required: true, autofocus: true %>
-    <%= f.input :last_name, label: 'Příjmení', required: true %>
-    <%= f.input :email, label: 'Email', required: true %>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Čeká se na potvrzení pro : <%= resource.unconfirmed_email %></p>
+<div class="form-wrapper">
+  <div class="form-login col-md-8 col-md-offset-2">
+    <h2>Upravit účet</h2>
+    
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.error_notification %>
+    
+      <div class="form-inputs">
+        <%= f.input :first_name, label: 'Jméno', required: true, autofocus: true %>
+        <%= f.input :last_name, label: 'Příjmení', required: true %>
+        <%= f.input :email, label: 'Email', required: true %>
+    
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <p>Čeká se na potvrzení pro : <%= resource.unconfirmed_email %></p>
+        <% end %>
+      
+        <%= f.input :password, label: 'Heslo', autocomplete: "off", hint: "nechte pole prázdné, pokud nechcete heslo měnit", required: false %>
+        <%= f.input :password_confirmation, label: 'Potvrzení hesla', required: false %>
+        <%= f.input :current_password, label: 'Současné heslo', hint: "potřebujeme současné heslo k potvrzení změn", required: true %>
+      </div>
+    
+      <div class="form-actions">
+        <%= f.button :submit, "Odeslat" %>
+      </div>
     <% end %>
-  
-    <%= f.input :password, label: 'Heslo', autocomplete: "off", hint: "nechte pole prázdné, pokud nechcete heslo měnit", required: false %>
-    <%= f.input :password_confirmation, label: 'Potvrzení hesla', required: false %>
-    <%= f.input :current_password, label: 'Současné heslo', hint: "potřebujeme současné heslo k potvrzení změn", required: true %>
+    
+    <%= link_to "Zpět", :back %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Odeslat" %>
-  </div>
-<% end %>
-
-<%= link_to "Zpět", :back %>
+</div>
+    

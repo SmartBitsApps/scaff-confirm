@@ -28,7 +28,7 @@ class DashboardController < ApplicationController
           render "dashboard/manager"
         when "user"
           @user = current_user
-          @my_subscriptions = Subscription.joins(:user).where(:subscriptions => { :user_id => @user.id })
+          #@my_subscriptions = Subscription.joins(:user).where(:subscriptions => { :user_id => @user.id })
           render "dashboard/user"  
         when "pending"
           @user = current_user

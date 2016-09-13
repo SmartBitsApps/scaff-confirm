@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   #  :confirmations => "users/confirmations" 
   #}
 
-  
+  resources :after_register
   
   resources :users, :path => 'uzivatel', :controller => 'users' do
     member do

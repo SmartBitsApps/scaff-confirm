@@ -49,10 +49,10 @@ before_action :configure_account_update_params, only: [:update]
   def configure_account_update_params
     if current_user.role == "admin"
     #devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :first_name, :last_name])
-      devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :password, :password_confirmation])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:role, :status, :first_name, :last_name, :password, :password_confirmation])
     else
     #for admin/manager
-      devise_parameter_sanitizer.permit(:account_update, keys: [:role, :status, :first_name, :last_name, :password, :password_confirmation])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :password, :password_confirmation])
     end
     
   end
@@ -66,4 +66,10 @@ before_action :configure_account_update_params, only: [:update]
   def after_inactive_sign_up_path_for(resource)
     super(resource)
   end
+  
+  def after_sign_up_path_for(resource)
+    after_register_path(:add_personal)
+  end
+
+  
 end

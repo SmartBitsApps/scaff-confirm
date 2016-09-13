@@ -28,6 +28,12 @@ class Account < ActiveRecord::Base
   accepts_nested_attributes_for :addresses
   #before_validation :check_for_filled_all_columns, only: [:update]
   
+  #validates_presence_of 
+  #validates_inclusion_of :field_name, :in => [true, false]
+  #validates :phone_number, :presence => true, :if => :completed?
+  validates :phone_number, :presence => true, :if => :add_personal
+  
+  
   
   enum degree_before: { "Ing." => 0, "Mgr." => 1, "Bc." => 2, "PhDr." => 3, "MUDr." => 4, "JUDr." => 5 }
   enum degree_after: { "DiS." => 0, "Ph.D." => 1, "MBA" => 2, "CSc." => 3 }
@@ -53,6 +59,14 @@ class Account < ActiveRecord::Base
     self.addresses.build(residence: 1, status: 0)
   end
   
+  def completed?
+    status == 'completed'
+  end
+  
+  def approved?
+    status == 'approved'
+  end
+  
   private
   
   #def check_for_filled_all_columns
@@ -60,5 +74,6 @@ class Account < ActiveRecord::Base
   #    return false if self[attr].nil?
   #  end
   #end
+  
   
 end

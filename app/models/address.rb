@@ -20,7 +20,7 @@ class Address < ActiveRecord::Base
   belongs_to :addressable, polymorphic: true
   
   enum residence: [:permanent, :postal]
-  enum status: [:inactive, :active]
+  enum status: [:inactive, :active, :same_as_permanent] #TODO: :same_as_permanent for (residence :postal) ONLY!
   
   
   
