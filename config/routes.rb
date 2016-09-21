@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
  
   
+  get 'jobs/index'
+
   get 'projects/index'
 
   get 'dashboard/index'
