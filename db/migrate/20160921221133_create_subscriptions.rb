@@ -3,7 +3,7 @@ class CreateSubscriptions < ActiveRecord::Migration
     create_table :subscriptions do |t|
       t.references :user, index: true, foreign_key: true
       t.integer :job_id
-      t.integer :status
+      t.integer :status, default: 0, null: false
 
       t.timestamps null: false
     end

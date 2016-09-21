@@ -8,7 +8,7 @@ class CreateClients < ActiveRecord::Migration
       t.string :vat_id
       t.string :contact_person_name
       t.string :contact_phone
-      t.boolean :public
+      t.boolean :public, default: false
 
       t.timestamps null: false
     end

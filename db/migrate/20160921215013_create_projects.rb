@@ -6,7 +6,7 @@ class CreateProjects < ActiveRecord::Migration
       t.text :description
       t.integer :manager_id
       t.integer :client_id
-      t.boolean :public
+      t.boolean :public, default: false
 
       t.timestamps null: false
     end

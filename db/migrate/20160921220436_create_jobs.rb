@@ -9,8 +9,8 @@ class CreateJobs < ActiveRecord::Migration
       t.text :what_bring
       t.string :start_date
       t.string :end_date
-      t.boolean :public
-      t.integer :status
+      t.boolean :public, default: false
+      t.integer :status, default: 0, null: false
 
       t.timestamps null: false
     end
