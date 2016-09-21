@@ -32,7 +32,24 @@ class Account < ActiveRecord::Base
   #validates_inclusion_of :field_name, :in => [true, false]
   #validates :phone_number, :presence => true, :if => :completed?
   
-  validates :phone_number, :presence => true, on: :update
+  #validates :phone_number, :presence => true, on: :update
+  
+  #validates_presence_of :cmpyname, :abnacn, :cmpyadd, :cmpydet, if: -> { current_step?(:business) }
+  
+  validates_presence_of :phone_number, if: -> { current_step?(:add_personal) }
+  validates_presence_of :gender, if: -> { current_step?(:add_personal) }
+  
+  validates_presence_of :birth_name, if: -> { current_step?(:add_birth) }
+  validates_presence_of :birth_date, if: -> { current_step?(:add_birth) }
+  validates_presence_of :birth_place, if: -> { current_step?(:add_birth) }
+  validates_presence_of :birth_number, if: -> { current_step?(:add_birth) }
+  
+  validates_presence_of :bank_acc, if: -> { current_step?(:add_bank) }
+  validates_presence_of :insurance, if: -> { current_step?(:add_bank) }
+  
+  validates_presence_of :street, if: -> { current_step?(:add_address) }
+  
+  #validates_inclusion_of :gender, :in => ["muž", "žena"], if: -> {current_step?(:add_personal)  }
   
   #validates :price_category, presence: true, if: -> (restaurant) { restaurant.price_category || price_category.price_category_id }
   #validates :price_category, presence: true, if: 'price_category_id.present?'
@@ -64,12 +81,16 @@ class Account < ActiveRecord::Base
     self.addresses.build(residence: 1, status: 0)
   end
   
-  def completed?
-    status == 'completed'
-  end
-  
-  def approved?
-    status == 'approved'
+  #def completed?
+  #  status == 'completed'
+  #end
+  #
+  #def approved?
+  #  status == 'approved'
+  #end
+  def current_step?(step_key)
+    
+    self.current_step == step_key.to_s
   end
   
   private

@@ -13,15 +13,19 @@ class AfterRegisterController < ApplicationController
   
   def update
     #@user = current_user
+    #@account = current_user.account
+    #@account.update_attributes(account_params)
+    #
+    #if wizard_path == after_register_path(:add_others)
+    #  check_or_update_registration
+    #else
+    #  render_wizard(@account)
+    #end
     @account = current_user.account
+    
+    params[:account][:current_step] = step
     @account.update_attributes(account_params)
-    
-    if wizard_path == after_register_path(:add_others)
-      check_or_update_registration
-    else
-      render_wizard(@account)
-    end
-    
+    render_wizard @account
   end
   
   
@@ -52,7 +56,7 @@ class AfterRegisterController < ApplicationController
       else
         params.require(:account).permit(:user_id, :phone_number, :degree_before, :degree_after, :birth_name,
                                       :birth_date, :gender, :birth_place, :birth_number, :nationality,
-                                      :family_status, :bank_acc, :insurance, :terms,
+                                      :family_status, :bank_acc, :insurance, :terms, :current_step,
                                       addresses_attributes: [:id, :residence, :street, :street_number, :city, :zip_code, :state])
       end
     end
