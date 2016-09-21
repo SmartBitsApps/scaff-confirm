@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
  
   
+  get 'projects/index'
+
   get 'dashboard/index'
 
   #devise_for :admins, module: "admins", path: 'master', path_names: { sign_in: 'prihlaseni', sign_out: 'odhlaseni', password: 'heslo', unlock: 'odblokovani' }

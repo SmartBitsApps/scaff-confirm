@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908182201) do
+ActiveRecord::Schema.define(version: 20160921215013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160908182201) do
     t.integer  "status",        default: 0,     null: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.string   "current_step"
   end
 
   add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
@@ -53,6 +54,19 @@ ActiveRecord::Schema.define(version: 20160908182201) do
   end
 
   add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
+
+  create_table "projects", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "manager_id"
+    t.integer  "client_id"
+    t.boolean  "public"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -86,4 +100,5 @@ ActiveRecord::Schema.define(version: 20160908182201) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "projects", "users"
 end
