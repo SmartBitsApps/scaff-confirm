@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
  
   
+  get 'clients/index'
+
   get 'subscriptions/index'
 
   get 'positions/index'
