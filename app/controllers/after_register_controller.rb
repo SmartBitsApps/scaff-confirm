@@ -3,11 +3,13 @@ class AfterRegisterController < ApplicationController
   
   before_filter :authenticate_user!
   
-  steps :add_personal, :add_birth, :add_bank, :add_address#, :add_affidavit
+  steps :add_personal, :add_birth, :add_bank, :add_address#, :add_affidavit, :add_terms
   
   def show
     #@user = current_user
     @account = current_user.account
+    @permanent_address = @account.addresses.where(residence: 0).first
+    @postal_address = @account.addresses.where(residence: 1).first
     render_wizard
   end
   
@@ -22,8 +24,12 @@ class AfterRegisterController < ApplicationController
     #  render_wizard(@account)
     #end
     @account = current_user.account
+    @permanent_address = @account.addresses.where(residence: 0).first
+    @postal_address = @account.addresses.where(residence: 1).first
     
     params[:account][:current_step] = step
+    #raise params.inspect
+    #binding.pry
     @account.update_attributes(account_params)
     render_wizard @account
   end

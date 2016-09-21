@@ -1,45 +1,43 @@
 <div class="form-wrapper">
   <div class="form-login col-md-6 col-md-offset-3">
     <br>
-    <h2>Step 4 : add_address</h2>
+    <h2>Step 2 : add_birth</h2>
     <hr>
     <br>
-    <%= simple_form_for(@account, :url => wizard_path, :method => :put, html: {class: 'form-horizontal'}, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :vertical_radio_and_checkboxes,
-radio_buttons: :vertical_radio_and_checkboxes, file: :vertical_file_input, boolean: :horizontal_boolean }) do |f| %>
+    <%= simple_form_for(@account, :url => wizard_path, :method => :put, html: {class: 'form-horizontal'}, wrapper: :horizontal_form ) do |f| %>
       <%= f.error_notification %>
     
       <div class="form-inputs">
-        <%= f.simple_fields_for :addresses, f.object.addresses.find_by(residence: 0) do |address_form| %>
+        <%#= f.association :user, :value => :user_id, as: :hidden %>
+        
+        <%= f.simple_fields_for :addresses, f.object.addresses.find_by(residence: 0) do |permanent| %>
       
           <h3>Adresa trvalého pobytu</h3>
           <br>
-          <%#= address_form.input_field :addressable_id, value: @account.user_id, type: "hidden" %>
-          <%#= address_form.input_field :addressable_type, value: "Account", type: "hidden" %>
-          <%= address_form.input :street, label: 'Ulice', required: false %>
-          <%= address_form.input :street_number, label: 'Číslo popisné', required: false %>
-          <%= address_form.input :city, label: 'Město', required: false %>
-          <%= address_form.input :zip_code, label: 'Směrovací číslo', required: false %>
-          <%= address_form.input :state, label: 'Stát', required: false %>
+          <%#= permanent.input_field :addressable_id, value: @account.user_id, type: "hidden" %>
+          <%#= permanent.input_field :addressable_type, value: "Account", type: "hidden" %>
+          <%= permanent.input :street, label: 'Ulice', required: false %>
+          <%= permanent.input :street_number, label: 'Číslo popisné', required: false %>
+          <%= permanent.input :city, label: 'Město', required: false %>
+          <%= permanent.input :zip_code, label: 'Směrovací číslo', required: false %>
+          <%= permanent.input :state, label: 'Stát', required: false %>
           <%#= @permanent_address.status %>
         <% end %>
         
-        <br>
-        <%# if @postal_address.active? %>
-        <%#= f.simple_fields_for :addresses, @postal_address do |address_form| %>
-        <%#= f.simple_fields_for @postal_address do |address_form| %>
-        <%= f.simple_fields_for :addresses, f.object.addresses.find_by(residence: 1) do |address_form| %>
+        <%= f.simple_fields_for :addresses, f.object.addresses.find_by(residence: 1) do |postal| %>
+      
           <h3>Korespondenční adresa</h3>
           <br>
-          <%#= address_form.input_field :addressable_id, value: @account.user_id, type: "hidden" %>
-          <%#= address_form.input_field :addressable_type, value: "Account", type: "hidden" %>
-          <%= address_form.input :street, label: 'Ulice', required: false %>
-          <%= address_form.input :street_number, label: 'Číslo popisné', required: false %>
-          <%= address_form.input :city, label: 'Město', required: false %>
-          <%= address_form.input :zip_code, label: 'Směrovací číslo', required: false %>
-          <%= address_form.input :state, label: 'Stát', required: false %>
-          <%#= @postal_address.status %>
-          <%# end %>
+          <%#= postal.input_field :addressable_id, value: @account.user_id, type: "hidden" %>
+          <%#= postal.input_field :addressable_type, value: "Account", type: "hidden" %>
+          <%= postal.input :street, label: 'Ulice', required: false %>
+          <%= postal.input :street_number, label: 'Číslo popisné', required: false %>
+          <%= postal.input :city, label: 'Město', required: false %>
+          <%= postal.input :zip_code, label: 'Směrovací číslo', required: false %>
+          <%= postal.input :state, label: 'Stát', required: false %>
+          <%#= @permanent_address.status %>
         <% end %>
+        
       </div>
     
       <div class="form-actions">
@@ -50,4 +48,4 @@ radio_buttons: :vertical_radio_and_checkboxes, file: :vertical_file_input, boole
       
     <% end %>
   </div>
-</div>    
+</div>  

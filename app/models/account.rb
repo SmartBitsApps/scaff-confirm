@@ -20,12 +20,13 @@
 #  status        :integer          default(0), not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  current_step  :string
 #
 
 class Account < ActiveRecord::Base
   belongs_to :user
   has_many :addresses, as: :addressable, dependent: :destroy
-  accepts_nested_attributes_for :addresses
+  accepts_nested_attributes_for :addresses#, update_only: true
   #before_validation :check_for_filled_all_columns, only: [:update]
   
   #validates_presence_of 
@@ -47,8 +48,24 @@ class Account < ActiveRecord::Base
   validates_presence_of :bank_acc, if: -> { current_step?(:add_bank) }
   validates_presence_of :insurance, if: -> { current_step?(:add_bank) }
   
-  validates_presence_of :street, if: -> { current_step?(:add_address) }
   
+  
+  
+  #validates_presence_of :phone_number
+  #validates_presence_of :gender
+  #validates_presence_of :birth_name
+  #validates_presence_of :birth_date
+  #validates_presence_of :birth_place
+  #validates_presence_of :birth_number
+  #validates_presence_of :bank_acc
+  #validates_presence_of :insurance
+  #validates_presence_of :street
+  #validates_presence_of :street_number
+  #validates_presence_of :city
+  #validates_presence_of :zip_code
+  #validates_presence_of :state
+  
+
   #validates_inclusion_of :gender, :in => ["muž", "žena"], if: -> {current_step?(:add_personal)  }
   
   #validates :price_category, presence: true, if: -> (restaurant) { restaurant.price_category || price_category.price_category_id }
@@ -93,6 +110,13 @@ class Account < ActiveRecord::Base
     self.current_step == step_key.to_s
   end
   
+  #def addresses_attributes=(addresses_attributes)
+  #
+  #  addresses_attributes.each do |i, address_attributes|
+  #    self.addresses.build(address_attributes)
+  #  end
+  #end
+      
   private
   
   #def check_for_filled_all_columns
