@@ -1,0 +1,43 @@
+<div class="form-wrapper">
+  <div class="form-login col-md-6 col-md-offset-3">
+    <br>
+    <h2>Step 2 : add_birth</h2>
+    <hr>
+    <br>
+    <%= simple_form_for(@account, :url => wizard_path, :method => :put, html: {class: 'form-horizontal'}, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :vertical_radio_and_checkboxes,
+radio_buttons: :vertical_radio_and_checkboxes, file: :vertical_file_input, boolean: :horizontal_boolean }) do |f| %>
+      <%= f.error_notification %>
+    
+      <div class="form-inputs">
+        <%#= f.association :user, :value => :user_id, as: :hidden %>
+        
+        <%= f.input :birth_name, label: 'Rodné příjmení', required: false %>
+        <%= f.input :birth_date, label: 'Datum narození', required: false, input_html: { id: 'datetimepicker1' } %>
+        <%= f.input :birth_place, label: 'Místo narození', required: false %>
+        <%= f.input :birth_number, label: 'Rodné číslo', required: false %>
+        
+      </div>
+    
+      <div class="form-actions">
+        <%= f.submit "Další", class: "btn btn-primary btn-lg btn-block" %>
+      </div>
+      
+      <%#= link_to "Přeskočit", next_wizard_path %>
+      
+    <% end %>
+  </div>
+</div>    
+
+
+<script>
+  $(function () {
+    $('#datetimepicker1').datetimepicker({
+      locale: 'cs',
+      viewMode: 'years',
+      format: 'DD.MM.YYYY'
+    });
+    
+  });
+</script>
+    
+    

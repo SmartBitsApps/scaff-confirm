@@ -67,9 +67,4 @@ before_action :configure_account_update_params, only: [:update]
     super(resource)
   end
   
-  def after_sign_up_path_for(resource)
-    after_register_path(:add_personal)
-  end
-
-  
 end

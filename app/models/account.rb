@@ -31,8 +31,13 @@ class Account < ActiveRecord::Base
   #validates_presence_of 
   #validates_inclusion_of :field_name, :in => [true, false]
   #validates :phone_number, :presence => true, :if => :completed?
-  validates :phone_number, :presence => true, :if => :add_personal
   
+  validates :phone_number, :presence => true, on: :update
+  
+  #validates :price_category, presence: true, if: -> (restaurant) { restaurant.price_category || price_category.price_category_id }
+  #validates :price_category, presence: true, if: 'price_category_id.present?'
+  #validate :degree_before, :if => :degree_before?
+  #<%= f.collection_select :city_id, City.all, :id, :name %>
   
   
   enum degree_before: { "Ing." => 0, "Mgr." => 1, "Bc." => 2, "PhDr." => 3, "MUDr." => 4, "JUDr." => 5 }
