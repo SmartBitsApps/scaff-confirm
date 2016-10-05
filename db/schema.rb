@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160921215013) do
+ActiveRecord::Schema.define(version: 20160921221458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,44 @@ ActiveRecord::Schema.define(version: 20160921215013) do
 
   add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
 
+  create_table "clients", force: :cascade do |t|
+    t.string   "company_name"
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone_number"
+    t.string   "vat_id"
+    t.string   "contact_person_name"
+    t.string   "contact_phone"
+    t.boolean  "public",              default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "position_id"
+    t.integer  "quantity"
+    t.integer  "alternates"
+    t.integer  "manager_id"
+    t.text     "what_bring"
+    t.string   "start_date"
+    t.string   "end_date"
+    t.boolean  "public",      default: false
+    t.integer  "status",      default: 0,     null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "jobs", ["project_id"], name: "index_jobs_on_project_id", using: :btree
+
+  create_table "positions", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.text     "requirements"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "title"
@@ -67,6 +105,16 @@ ActiveRecord::Schema.define(version: 20160921215013) do
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "job_id"
+    t.integer  "status",     default: 0, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -100,5 +148,7 @@ ActiveRecord::Schema.define(version: 20160921215013) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "jobs", "projects"
   add_foreign_key "projects", "users"
+  add_foreign_key "subscriptions", "users"
 end

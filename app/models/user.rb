@@ -35,7 +35,10 @@ class User < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :validatable
           
   has_one :account, dependent: :destroy
-  #accepts_nested_attributes_for :account
+  accepts_nested_attributes_for :account
+  
+  #TODO: set it for admin/manager only
+  has_many :projects, dependent: :nullify
   
   # Devise validates email and password automatically
   validates_presence_of :first_name

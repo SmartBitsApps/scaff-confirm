@@ -25,9 +25,11 @@ Rails.application.routes.draw do
   #}
 
   resources :after_register
-  
+  resources :projects
   resources :users, :path => 'uzivatel', :controller => 'users' do
+    
     member do
+      #resources :projects
       resource :account, :path => 'ucet', :only => [:show, :edit, :update] do
         #resources :after_register
         resources :addresses

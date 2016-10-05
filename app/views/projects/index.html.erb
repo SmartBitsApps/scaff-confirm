@@ -1,2 +1,62 @@
 <h1>Projects#index</h1>
 <p>Find me in app/views/projects/index.html.erb</p>
+<% if @projects.any? %>
+  <% for project in @projects do %>
+    <%= link_to project.title, project_path(project) %>
+  <% end %>
+<% else %>
+  <p>Není zde žádný projekt.</p>
+<% end %>
+
+<% if current_user.try(:admin?) %>
+  <p>Vítejte Admine! :)</p>
+<% else %>
+  <p>Vítejte uživateli! role: <%= current_user.try(:role) %></p>
+<% end %>
+
+<br>
+
+<%= link_to 'Nová nabídka', new_project_path(id: current_user.id), class: "btn btn-primary" %>
+
+
+
+
+<!--#######################################-->
+<h1>Projekty</h1>
+
+<div class="form-group">
+  <%= link_to 'Nový projekt', new_project_path(id: current_user.id), class: 'btn btn-default' %>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Manažer</th>
+      <th>Klient</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= link_to project.title, project_path(project) %></td>
+        <td><%= User.find_by(id: project.manager_id) unless project.manager_id %></td>
+        <td><%#= User.where(id: project.manager_id).first.full_name unless project.manager_id %></td>
+        <td>Jméno klienta</td>
+        <td>
+          <%= link_to 'Upravit', edit_project_path(project), class: 'btn btn-default' %>
+          <%= link_to 'Smazat', project_path(project), method: :delete, data: { confirm: 'Jste si jisti?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+
+
+

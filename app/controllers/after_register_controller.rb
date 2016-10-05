@@ -3,7 +3,7 @@ class AfterRegisterController < ApplicationController
   
   before_filter :authenticate_user!
   
-  steps :add_personal, :add_birth, :add_bank, :add_address#, :add_affidavit, :add_terms
+  steps :add_personal, :add_birth, :add_bank#, :add_address#, :add_affidavit, :add_terms
   
   def show
     #@user = current_user
@@ -63,7 +63,7 @@ class AfterRegisterController < ApplicationController
         params.require(:account).permit(:user_id, :phone_number, :degree_before, :degree_after, :birth_name,
                                       :birth_date, :gender, :birth_place, :birth_number, :nationality,
                                       :family_status, :bank_acc, :insurance, :terms, :current_step,
-                                      addresses_attributes: [:id, :residence, :street, :street_number, :city, :zip_code, :state])
+                                      addresses_attributes: [[:id, :residence, :street, :street_number, :city, :zip_code, :state]])
       end
     end
     

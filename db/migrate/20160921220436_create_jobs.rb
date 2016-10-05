@@ -1,7 +1,7 @@
 class CreateJobs < ActiveRecord::Migration
   def change
     create_table :jobs do |t|
-      t.references :event, index: true, foreign_key: true
+      t.references :project, index: true, foreign_key: true
       t.integer :position_id
       t.integer :quantity
       t.integer :alternates

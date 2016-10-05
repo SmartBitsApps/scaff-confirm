@@ -92,19 +92,14 @@ class Account < ActiveRecord::Base
     self.terms  ||= false
   end
   
+  # imediately for new record build permanent and postal addresses
   def build_new_address
     #self.addresses ||= 
     self.addresses.build(residence: 0, status: 1)
     self.addresses.build(residence: 1, status: 0)
   end
   
-  #def completed?
-  #  status == 'completed'
-  #end
-  #
-  #def approved?
-  #  status == 'approved'
-  #end
+  # information for wicked steps form
   def current_step?(step_key)
     
     self.current_step == step_key.to_s
