@@ -1,9 +1,12 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
-    @projects = Project.all.order(created_at: :desc) #.where(visible: true)
+    @projects = Project.all.order(created_at: :desc).where(public: true)
   end
   
   def show
+    @managers = User.all.where(role: 2)
     @project = Project.find(params[:id])
   end
   
@@ -13,7 +16,9 @@ class ProjectsController < ApplicationController
   end
   
   def edit
+    @managers = User.all.where(role: 2)
     @project = Project.find(params[:id])
+    
   end
   
   def create
@@ -23,7 +28,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Položka byla úspěšně vytvořena.' }
+        format.html { redirect_to @project, notice: 'Projekt byl úspěšně vytvořen.' }
         format.json { render :show, status: :created, location: @project }
       else
         @project.event_addresses.build
@@ -43,7 +48,7 @@ class ProjectsController < ApplicationController
         #if @project.status == :completed
         #  @project.user.update_attributes(role: :user)
         #end
-        format.html { redirect_to @project, notice: 'Účet byl úšpěšně upraven.' }
+        format.html { redirect_to @project, notice: 'Projekt byl úspěšně upraven.' }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }
@@ -55,8 +60,8 @@ class ProjectsController < ApplicationController
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy
-    @project = Project.find(params[:id])
-    @project.destroy
+    project = Project.find(params[:id])
+    project.destroy
     #authorize @project
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Projekt byl smazán.' }

@@ -7,8 +7,9 @@
     <%#= f.input :start_date, label: 'Začátek', required: false, input_html: { id: 'datetimepicker' } %>
     <%#= f.input :end_date, label: 'Konec', required: false, input_html: { id: 'datetimepicker2' } %>
     <% if !@managers.nil? %>
-      <%= f.input :manager, label: 'Manažer', required: false do %>
-        <%= f.select :manager, @managers.map { |r| [r.full_name, r.id] }, include_blank: true %>
+      <%= f.input :manager_id, label: 'Manažer projektu', required: false do %>
+        <%= f.select(:manager_id, @managers.map { |r| [r.full_name, r.id] }, {include_blank: true}, { :class => 'col-xs-12 form-control string optional' }) %>
+        <%#= f.select :manager, @managers.ids.map { |r| [r, r.id] }, include_blank: true %>
       <% end %>
     <% end %>
     <br>

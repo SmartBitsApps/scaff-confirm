@@ -9,7 +9,7 @@ before_action :configure_account_update_params, only: [:update]
 
   # POST /resource
   def create
-    binding.pry
+    #binding.pry
     super
   end
 
@@ -46,13 +46,12 @@ before_action :configure_account_update_params, only: [:update]
   end
 
   # If you have extra params to permit, append them to the sanitizer.
-  #TODO: add if for admin/manager with :status key
   def configure_account_update_params
-    if current_user.role == "admin"
-    #devise_parameter_sanitizer.permit(:account_update, keys: [:attribute, :first_name, :last_name])
+    # Role and status keys for admin or manager only!
+    if current_user.role == "admin" || current_user.role == "manager"
       devise_parameter_sanitizer.permit(:account_update, keys: [:role, :status, :first_name, :last_name, :password, :password_confirmation])
     else
-    #for admin/manager
+      # User role == "pending" || "user"
       devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :password, :password_confirmation])
     end
     
@@ -60,7 +59,12 @@ before_action :configure_account_update_params, only: [:update]
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    super(resource)
+    
+    if current_user.account.strarted?
+      after_register_path(:add_personal)
+    else
+      super(resource)
+    end
   end
 
   # The path used after sign up for inactive accounts.

@@ -16,4 +16,8 @@
 #
 
 class Client < ActiveRecord::Base
+  
+  has_many :projects
+  
+  validates_presence_of :name, :phone_number, :contact_person_name, :contact_phone #:vat_id
 end

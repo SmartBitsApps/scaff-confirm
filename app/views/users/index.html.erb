@@ -15,10 +15,10 @@
   <tbody>
     <% @users.each do |user| %>
       <%#= link_to user_path(user) do %>
-        <tr data-link="<%= user_path(user, :format => 'html') %>" >
-          <td><%= user.first_name + " " + user.last_name %></td>
-          <td><%= user.email %></td>
-          <td><%= user.created_at %></td>
+        <tr>
+          <td class="link" data-link="<%= user_path(user, :format => 'html') %>" ><%= user.first_name + " " + user.last_name %></td>
+          <td class="link" data-link="<%= user_path(user, :format => 'html') %>" ><%= user.email %></td>
+          <td class="link" data-link="<%= user_path(user, :format => 'html') %>" ><%= user.created_at %></td>
           
           <td>
             <%= link_to user_path(user), class: 'btn btn-xs', title: "#{ t('.show', default: t('helpers.links.show')) }" do %>
@@ -38,13 +38,13 @@
   </tbody>
 </table>
 
-<%= link_to "Uložit",
+<%#= link_to "Uložit",
             new_user_path,
             class: 'btn btn-primary' %>
 
 <script>
   $(document).ready(function() {
-    $("tr").click(function() {
+    $("td.link").click(function() {
      window.location = $(this).data("link");    
     })
   })

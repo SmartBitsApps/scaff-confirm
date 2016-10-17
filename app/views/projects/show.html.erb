@@ -1,7 +1,9 @@
-<h1>Projekt</h1>
+<h1>Projekt : <%= @project.title %></h1>
 <hr>
-<h3><%= @project.title %></h3>
 
+<p><b>Popis : </b><%= @project.description %></p>
+<p><%#= @managers.try(id: @project.manager_id).first %> </p>
+<p><b>Manažer projektu : </b><%= link_to @project.manager_id ? @managers.find_by(id: @project.manager_id).full_name : "Manažer není zadán", user_path(@project.manager_id) %> </p> <!-- unless !@managers.nil? -->
 <br>
 <br>
 <%= link_to 'Zpět', projects_path %>

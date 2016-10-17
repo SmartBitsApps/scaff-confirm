@@ -1,6 +1,8 @@
 <div class="form-wrapper">
-  <div class="form-login col-md-8 col-md-offset-2">
-    <h2>Upravit účet</h2>
+  <div class="form-login col-xs-12 col-md-6 col-md-offset-3">
+    <div class="form-title">
+      <h2>Upravit účet</h2>
+    </div>
     
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= f.error_notification %>

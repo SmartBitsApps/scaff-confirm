@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   
   def index
     
-    @users = User.all
+    @users = User.all.order(created_at: :desc)
     authorize current_user
   end
   
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
     def secure_params
       #TODO: add pundit for role (for admin and manager)
-      if current_user.role == "admin"
+      if current_user.admin? || current_user.manager?
         params.require(:user).permit(:role, :status, :first_name, :last_name) #, :email
       else
         params.require(:user).permit(:first_name, :last_name) #,email

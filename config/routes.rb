@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
  
-  
-  get 'clients/index'
+  resources :clients
+  #get 'clients/index'
 
   get 'subscriptions/index'
 

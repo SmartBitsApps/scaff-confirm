@@ -31,7 +31,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Title</th>
+      <th>Název</th>
       <th>Manažer</th>
       <th>Klient</th>
       <th></th>
@@ -42,12 +42,12 @@
     <% @projects.each do |project| %>
       <tr>
         <td><%= link_to project.title, project_path(project) %></td>
-        <td><%= User.find_by(id: project.manager_id) unless project.manager_id %></td>
-        <td><%#= User.where(id: project.manager_id).first.full_name unless project.manager_id %></td>
-        <td>Jméno klienta</td>
+        <td><%= project.manager_id ? User.find_by(id: project.manager_id).try(:full_name) : "Není přidělen manažer"%></td>
+        <!-- <td><%#= User.where(id: project.manager_id).first.full_name unless project.manager_id %></td> -->
+        <td>Klient</td>
         <td>
           <%= link_to 'Upravit', edit_project_path(project), class: 'btn btn-default' %>
-          <%= link_to 'Smazat', project_path(project), method: :delete, data: { confirm: 'Jste si jisti?' }, class: 'btn btn-danger' %>
+          <%#= link_to 'Smazat', project_path(project), method: :delete, data: { confirm: 'Jste si jisti?' }, class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>
