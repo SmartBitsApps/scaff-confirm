@@ -49,7 +49,7 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1
   # PATCH/PUT /accounts/1.json
   def update
-    binding.pry
+    #binding.pry
     #@permanent_address = Address.where(addressable_id: @account.user_id).where(addressable_type: "Account").where(residence: 0).first
 #@permanent_address = @account.addresses.find_by(residence: 0)
 #@postal_address = @account.addresses.find_by(residence: 1)

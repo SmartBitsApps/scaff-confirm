@@ -23,15 +23,15 @@ class ClientPolicy < ApplicationPolicy
   end
   
   def edit?
-    index?
+    @current_user.admin? or @client.user_id == @current_user.id
   end
 
   def update?
-    index?
+    edit?
   end
 
   def destroy?
-    index? && @client.user_id == @current_user.id
+    edit?
   end
   
   class Scope < Scope

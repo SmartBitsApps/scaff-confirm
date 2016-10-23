@@ -6,7 +6,9 @@
         <div class=" btn-group pull-right">
           <%#= link_to "Zpět", :back, class: "btn btn-default btn-headline" %>
           <%= link_to "Zpět", clients_path, class: "btn btn-default btn-headline" %>
-          <%= link_to "Upravit", edit_client_path(@client), class: "btn btn-success btn-headline" %>
+          <% if @client.user_id == current_user.id  || current_user.admin? %>
+            <%= link_to "Upravit", edit_client_path(@client), class: "btn btn-success btn-headline" %>
+          <% end %>
           
           <%#= link_to "Nový", new_client_path, class: "btn btn-success btn-headline" %>
         </div>

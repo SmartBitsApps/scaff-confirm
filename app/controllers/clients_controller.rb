@@ -5,7 +5,7 @@ class ClientsController < ApplicationController
   after_action :verify_authorized
   
   def index
-    @clients = Client.all
+    @clients = Client.all.order(created_at: :desc)
     authorize current_user
   end
   
@@ -36,6 +36,8 @@ class ClientsController < ApplicationController
   
   def update
     authorize @client
+    
+    @client.user_id ||= current_user.id
     
     if @client.update(client_params)
       redirect_to @client, notice: "Klient \"#{@client.company_name}\" byl upraven."
