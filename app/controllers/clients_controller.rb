@@ -14,12 +14,13 @@ class ClientsController < ApplicationController
   end
   
   def new
-    @client = Client.new
+    @client = Client.new(user_id: current_user.id)
     authorize @client
   end
 
   def create
     @client = Client.new(client_params)
+    @client.user_id = current_user.id
     authorize @client
     
     if @client.save

@@ -8,7 +8,7 @@
 #  description :text
 #  manager_id  :integer
 #  client_id   :integer
-#  public      :boolean
+#  public      :boolean          default(FALSE)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

@@ -19,7 +19,7 @@
   c.role = 2
   c.save
 }
-50.times { |n| Project.create(user_id: "#{rand(5..30).to_i}", title: "Projekt #{n}", description: "Lorem ipsum dolor sit amet", public: true) }
+50.times { |n| Project.create(user_id: "#{rand(2..11).to_i}", title: "Projekt #{n}", description: "Lorem ipsum dolor sit amet", public: true) }
 
 25.times { |n| 
   c = User.new(first_name: "User - #{n}", last_name: "Last_#{n}", email:"user#{n}@smartbits.cz", password: "paegas", password_confirmation: "paegas")

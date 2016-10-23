@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20160921221458) do
   add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
+    t.integer  "user_id"
     t.string   "company_name"
     t.string   "name"
     t.string   "email"
@@ -67,6 +68,8 @@ ActiveRecord::Schema.define(version: 20160921221458) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
+
+  add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
 
   create_table "jobs", force: :cascade do |t|
     t.integer  "project_id"
@@ -99,9 +102,9 @@ ActiveRecord::Schema.define(version: 20160921221458) do
     t.text     "description"
     t.integer  "manager_id"
     t.integer  "client_id"
-    t.boolean  "public"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "public",      default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
@@ -148,6 +151,7 @@ ActiveRecord::Schema.define(version: 20160921221458) do
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "clients", "users"
   add_foreign_key "jobs", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "subscriptions", "users"

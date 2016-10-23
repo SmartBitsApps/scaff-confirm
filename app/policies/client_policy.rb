@@ -31,7 +31,7 @@ class ClientPolicy < ApplicationPolicy
   end
 
   def destroy?
-    index? && @client.owner_id == @current_user.id
+    index? && @client.user_id == @current_user.id
   end
   
   class Scope < Scope
