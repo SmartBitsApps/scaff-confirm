@@ -57,7 +57,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><%= link_to "Uživatelé", users_path %></li>
             <li><%= link_to "Projekty", projects_path %></li>
-            <li><%= link_to "Link3", '#' %></li>
+            <li><%= link_to "Klienti", clients_path %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
@@ -83,11 +83,12 @@
 
     <div class="container main">
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
-        <div class="col-md-3">
+        <!--#TODO: unhide sidebar and col-md-9 for upper div -->
+        <div class="col-md-3 hidden">
           <div class="well sidebar-nav">
             <h3>Sidebar</h3>
             <ul class="nav nav-list">

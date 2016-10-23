@@ -27,6 +27,7 @@ class Account < ActiveRecord::Base
   belongs_to :user
   has_many :addresses, as: :addressable, dependent: :destroy
   accepts_nested_attributes_for :addresses#, update_only: true
+  mattr_accessor :current_step
   #before_validation :check_for_filled_all_columns, only: [:update]
   
   #validates_presence_of 
@@ -48,7 +49,7 @@ class Account < ActiveRecord::Base
   validates_presence_of :bank_acc, if: -> { current_step?(:add_bank) }
   validates_presence_of :insurance, if: -> { current_step?(:add_bank) }
   
-  
+  validates_associated :addresses, if: -> { current_step?(:add_address) }
   
   
   #validates_presence_of :phone_number

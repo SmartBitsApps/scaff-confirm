@@ -17,6 +17,7 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+@import "clients";
 
 * {
 	box-sizing: border-box;
@@ -33,8 +34,7 @@
   padding-top: 6rem;
   padding-bottom: 6rem;
 }
-
-tr:hover {
+.table tbody > tr > td {
     cursor: pointer;
     //background-color: #ccc;
     //border-left: 2px solid red;

@@ -1,0 +1,66 @@
+<%- model_class = Client -%>
+<div class="page-header">
+    <div class="row">
+      <h2 class="col-xs-8">Klient: <%= @client.company_name %></h2>
+      <div class="col-xs-4">
+        <div class=" btn-group pull-right">
+          <%#= link_to "Zpět", :back, class: "btn btn-default btn-headline" %>
+          <%= link_to "Zpět", clients_path, class: "btn btn-default btn-headline" %>
+          <%= link_to "Upravit", edit_client_path(@client), class: "btn btn-success btn-headline" %>
+          
+          <%#= link_to "Nový", new_client_path, class: "btn btn-success btn-headline" %>
+        </div>
+      </div><br>
+    </div>
+</div>
+
+<div class="form-wrapper">
+  <div class="row" style="line-height: 3em;">
+    <div class="col-xs-3 pull-left"><strong style="float: right!important;margin-right: 20px;">Společnost:</strong></div>
+    <div class="col-xs-9 pull-right"><%= @client.company_name %></div>
+  </div>
+  
+  <div class="row" style="line-height: 3em;">
+    <div class="col-xs-3 pull-left"><strong style="float: right!important;margin-right: 20px;">Název:</strong></div>
+    <div class="col-xs-9 pull-right"><%= @client.name %></div>
+  </div>
+  
+  <div class="row" style="line-height: 3em;">
+    <div class="col-xs-3 pull-left"><strong style="float: right!important;margin-right: 20px;">Email:</strong></div>
+    <div class="col-xs-9 pull-right"><%= mail_to @client.email %></div>
+  </div>
+  
+  <div class="row" style="line-height: 3em;">
+    <div class="col-xs-3 pull-left"><strong style="float: right!important;margin-right: 20px;">Tel.kontakt:</strong></div>
+    <div class="col-xs-9 pull-right"><%= @client.phone_number %></div>
+  </div>
+  
+  <div class="row" style="line-height: 3em;">
+    <div class="col-xs-3 pull-left"><strong style="float: right!important;margin-right: 20px;">IČO:</strong></div>
+    <div class="col-xs-9 pull-right"><%= @client.vat_id %></div>
+  </div>
+  
+  <div class="row" style="line-height: 3em;">
+    <div class="col-xs-3 pull-left"><strong style="float: right!important;margin-right: 20px;">Kontaktní osoba:</strong></div>
+    <div class="col-xs-9 pull-right"><%= @client.contact_person_name %></div>
+  </div>
+  
+  <div class="row" style="line-height: 3em;">
+    <div class="col-xs-3 pull-left"><strong style="float: right!important;margin-right: 20px;">Telefon:</strong></div>
+    <div class="col-xs-9 pull-right"><%= @client.contact_phone %></div>
+  </div>
+  
+  <div class="row" style="line-height: 3em;">
+    <div class="col-xs-3 pull-left"><strong style="float: right!important;margin-right: 20px;">Vytvořeno:</strong></div>
+    <div class="col-xs-9 pull-right"><%= @client.created_at.strftime("%H:%Mh - %d.%m.%Y") %></div>
+    
+    
+  </div>
+  
+  <div class="row" style="line-height: 3em;">
+    <div class="col-xs-3 pull-left"><strong style="float: right!important;margin-right: 20px;">Poslední změna:</strong></div>
+    <div class="col-xs-9 pull-right"><%= "před " + time_ago_in_words(@client.updated_at).downcase %></div>
+  </div>
+</div>    
+    
+    

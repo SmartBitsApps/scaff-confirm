@@ -3,7 +3,12 @@
 
 <p><b>Popis : </b><%= @project.description %></p>
 <p><%#= @managers.try(id: @project.manager_id).first %> </p>
-<p><b>Manažer projektu : </b><%= link_to @project.manager_id ? @managers.find_by(id: @project.manager_id).full_name : "Manažer není zadán", user_path(@project.manager_id) %> </p> <!-- unless !@managers.nil? -->
+<% if @project.manager_id %>
+    <%= @managers.find_by(id: @project.manager_id).full_name %>
+<% else %>
+    <p>Manažer není zadán</p>
+<% end %>
+<!--<p><b>Manažer projektu : </b><%#= link_to @project.manager_id ? @managers.find_by(id: @project.manager_id).full_name : "Manažer není zadán", user_path(@project.manager_id) %> </p> <!-- unless !@managers.nil? -->
 <br>
 <br>
 <%= link_to 'Zpět', projects_path %>

@@ -40,6 +40,8 @@ class User < ActiveRecord::Base
   #TODO: set it for admin/manager only
   has_many :projects, dependent: :nullify
   
+  has_many :clients, dependent: :nullify
+  
   # Devise validates email and password automatically
   validates_presence_of :first_name
   validates_presence_of :last_name

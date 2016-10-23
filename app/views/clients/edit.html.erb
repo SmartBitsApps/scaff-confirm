@@ -1,0 +1,28 @@
+<%- model_class = Client -%>
+
+<div class="page-header">
+    <div class="row">
+      <h2 class="col-md-8">Klient : <%= @client.company_name %></h2>
+      <div class="col-md-4 pull-right"><%= link_to "Zpět", clients_path, class: "btn btn-default btn-headline" %></div><br>
+    </div>
+</div>
+
+<div class="form-wrapper">
+  <div class="form-login col-xs-12 col-md-6 col-md-offset-3">
+    
+    <hr>
+    <%= simple_form_for @client, html: {class: 'form-horizontal'}, wrapper: :horizontal_form, wrapper_mappings: { check_boxes: :vertical_radio_and_checkboxes,
+                                                                    radio_buttons: :vertical_radio_and_checkboxes, file: :vertical_file_input, boolean: :horizontal_boolean } do |f| %>
+    <%= f.error_notification %>
+    
+      <%= render( partial: 'form',  locals: { f: f } )%>
+    
+    
+      <div class="form-actions">
+        <%= f.button :submit, 'Upravit', class: "btn btn-primary btn-lg btn-block" %>
+      </div>
+  
+    <% end %>
+     
+  </div>
+</div>

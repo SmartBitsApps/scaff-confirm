@@ -16,8 +16,9 @@
 #
 
 class Client < ActiveRecord::Base
-  
+  belongs_to :user
   has_many :projects
   
-  validates_presence_of :name, :phone_number, :contact_person_name, :contact_phone #:vat_id
+  validates_presence_of :company_name #, :phone_number, :email, :contact_person_name, :contact_phone #:vat_id
+  validates_inclusion_of :public, :in => [true, false]
 end

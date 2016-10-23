@@ -1,0 +1,15 @@
+  <div class="form-inputs">
+    <%= f.input :company_name, label: 'Společnost', required: false %>
+    <%= f.input :email, label: 'Email', required: false %>
+    <%= f.input :phone_number, label: 'Telefon', required: false %>
+    <%= f.input :vat_id, label: 'IČO', required: false %>
+    <%= f.input :contact_person_name, label: 'Kontaktní osoba', required: false %>
+    <%= f.input :contact_phone, label: 'Kontaktní telefon', required: false %>
+    
+    <% if current_user.admin? || current_user.manager? %>
+      <%= f.input :public, as: :boolean, checked_value: true, unchecked_value: false, label: 'Veřejné' %>
+    <% end %>
+    
+    <br>
+    <hr>
+  </div>

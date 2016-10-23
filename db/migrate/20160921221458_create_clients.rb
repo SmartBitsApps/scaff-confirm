@@ -1,6 +1,7 @@
 class CreateClients < ActiveRecord::Migration
   def change
     create_table :clients do |t|
+      t.references :owner, references: :users
       t.string :company_name
       t.string :name
       t.string :email

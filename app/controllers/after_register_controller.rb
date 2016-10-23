@@ -3,13 +3,13 @@ class AfterRegisterController < ApplicationController
   
   before_filter :authenticate_user!
   
-  steps :add_personal, :add_birth, :add_bank#, :add_address#, :add_affidavit, :add_terms
+  steps :add_personal, :add_birth, :add_bank, :add_address#, :add_affidavit, :add_terms
   
   def show
     #@user = current_user
     @account = current_user.account
-    @permanent_address = @account.addresses.where(residence: 0).first
-    @postal_address = @account.addresses.where(residence: 1).first
+    #@permanent_address = @account.addresses.where(residence: 0).first
+    #@postal_address = @account.addresses.where(residence: 1).first
     render_wizard
   end
   
@@ -24,12 +24,12 @@ class AfterRegisterController < ApplicationController
     #  render_wizard(@account)
     #end
     @account = current_user.account
-    @permanent_address = @account.addresses.where(residence: 0).first
-    @postal_address = @account.addresses.where(residence: 1).first
+    #@permanent_address = @account.addresses.where(residence: 0).first
+    #@postal_address = @account.addresses.where(residence: 1).first
     
     params[:account][:current_step] = step
     #raise params.inspect
-    #binding.pry
+    binding.pry
     @account.update_attributes(account_params)
     render_wizard @account
   end
@@ -57,7 +57,7 @@ class AfterRegisterController < ApplicationController
       if current_user == "admin"
         params.require(:account).permit(:user_id, :phone_number, :degree_before, :degree_after, :birth_name,
                                       :birth_date, :gender, :birth_place, :birth_number, :nationality,
-                                      :family_status, :bank_acc, :insurance, :terms, :status,
+                                      :family_status, :bank_acc, :insurance, :terms, :status, :current_step,
                                       addresses_attributes: [:id, :residence, :street, :street_number, :city, :zip_code, :state]) #:id, :addressable_id, :addressable_type, 
       else
         params.require(:account).permit(:user_id, :phone_number, :degree_before, :degree_after, :birth_name,

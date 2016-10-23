@@ -18,6 +18,7 @@
 
 class Address < ActiveRecord::Base
   belongs_to :addressable, polymorphic: true
+  attr_accessor :current_step
   
   enum residence: [:permanent, :postal]
   enum status: [:inactive, :active, :same_as_permanent] #TODO: :same_as_permanent for (residence :postal) ONLY!
@@ -40,4 +41,8 @@ class Address < ActiveRecord::Base
     account.current_step == step_key.to_s
     binding.pry
   end
+  #def current_step?(step_key)
+  #  
+  #  self.current_step == step_key.to_s
+  #end
 end
