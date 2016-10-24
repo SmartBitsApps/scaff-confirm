@@ -35,9 +35,11 @@
         </tr>
       <%# end %>
     <% end %>
+    
   </tbody>
 </table>
-
+<hr>
+<%= will_paginate @users, renderer: BootstrapPagination::Rails, previous_label: "Předchozí", next_label: "Další"  %>
 <%#= link_to "Uložit",
             new_user_path,
             class: 'btn btn-primary' %>

@@ -5,7 +5,7 @@ class ClientsController < ApplicationController
   after_action :verify_authorized
   
   def index
-    @clients = Client.all.order(created_at: :desc)
+    @clients = Client.all.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
     authorize current_user
   end
   

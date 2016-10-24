@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   after_action :verify_authorized
   
   def index
     
-    @users = User.all.order(created_at: :desc)
+    @users = User.all.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
     authorize current_user
   end
   

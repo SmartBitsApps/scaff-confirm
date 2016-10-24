@@ -39,3 +39,8 @@
     //background-color: #ccc;
     //border-left: 2px solid red;
 }
+
+// Clients // #TODO: add more colors : for public:true / others
+.table tbody > .no-public > td {
+  background-color: #ccc;
+}
