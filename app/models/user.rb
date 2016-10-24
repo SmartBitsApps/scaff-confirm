@@ -42,6 +42,11 @@ class User < ActiveRecord::Base
   
   has_many :clients, dependent: :nullify
   
+  #scope :admins, -> { where(role: :admin)}
+  scope :admins, -> { where(role: 3) }
+  scope :managers, -> { where(role: 2) }
+  
+  
   # Devise validates email and password automatically
   validates_presence_of :first_name
   validates_presence_of :last_name

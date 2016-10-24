@@ -9,6 +9,18 @@ class UsersController < ApplicationController
     authorize current_user
   end
   
+  def admins
+    @users = User.admins.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
+    render action: :index
+    authorize current_user
+  end
+  
+  def managers
+    @users = User.managers.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
+    render action: :index
+    authorize current_user
+  end
+  
   def show
     authorize @user
   end

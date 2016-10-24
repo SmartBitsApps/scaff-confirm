@@ -9,6 +9,14 @@ class UserPolicy
   def index?
     @current_user.admin? || @current_user.manager?
   end
+  
+  def admins?
+    @current_user.admin?
+  end
+  
+  def managers?
+    @current_user.admin? || @current_user.manager?
+  end
 
   def show?
     @current_user.admin? || @current_user.manager? || @current_user == @user
